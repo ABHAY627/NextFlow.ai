@@ -1,26 +1,315 @@
 @import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
 
+/* ─── Krea-Matching Dark Theme Tokens ────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --sidebar-bg: #0a0a0a;
+  --sidebar-border: #1a1a1a;
+  --node-bg: #141414;
+  --node-border: #262626;
+  --node-border-hover: #3a3a3a;
+  --node-header-bg: #1a1a1a;
+  --input-bg: #0d0d0d;
+  --input-border: #262626;
+  --input-focus: #8B5CF6;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-blue: #3B82F6;
+  --accent-purple: #8B5CF6;
+  --accent-purple-light: #A78BFA;
+  --handle-text: #3B82F6;
+  --handle-image: #22C55E;
+  --handle-video: #F97316;
+  --handle-number: #8B5CF6;
+  --success: #22C55E;
+  --error: #EF4444;
+  --warning: #EAB308;
+  --running: #8B5CF6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-node-bg: var(--node-bg);
+  --color-node-border: var(--node-border);
+  --color-node-border-hover: var(--node-border-hover);
+  --color-node-header-bg: var(--node-header-bg);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-input-focus: var(--input-focus);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-purple-light: var(--accent-purple-light);
+  --color-handle-text: var(--handle-text);
+  --color-handle-image: var(--handle-image);
+  --color-handle-video: var(--handle-video);
+  --color-handle-number: var(--handle-number);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+  --color-running: var(--running);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ───────────────────────────────────────────────── */
+html, body {
+  height: 100%;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans, 'Inter', system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar (Krea-Style) ─────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ─── React Flow Overrides ───────────────────────────────── */
+.react-flow__background {
+  background-color: #000000 !important;
+}
+
+.react-flow__minimap {
+  background-color: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.react-flow__minimap-mask {
+  fill: rgba(139, 92, 246, 0.1) !important;
+  stroke: rgba(139, 92, 246, 0.3) !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__minimap-node {
+  fill: #262626 !important;
+  stroke: #3a3a3a !important;
+}
+
+.react-flow__controls {
+  background: #141414 !important;
+  border: 1px solid #262626 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.react-flow__controls-button {
+  background: #141414 !important;
+  border: none !important;
+  border-bottom: 1px solid #262626 !important;
+  color: #a1a1aa !important;
+  fill: #a1a1aa !important;
+  width: 32px !important;
+  height: 32px !important;
+  transition: all 0.15s ease !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+}
+
+.react-flow__edge-path {
+  stroke: #8B5CF6 !important;
+  stroke-width: 2 !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5 !important;
+  animation: edgeFlow 0.5s linear infinite !important;
+}
+
+.react-flow__connection-line {
+  stroke: #8B5CF6 !important;
+  stroke-width: 2 !important;
+  stroke-dasharray: 5 !important;
+}
+
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  border: 2px solid #3a3a3a !important;
+  background: #1a1a1a !important;
+  transition: all 0.2s ease !important;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.4) !important;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.5) !important;
+  border-color: #8B5CF6 !important;
+}
+
+.react-flow__handle.connectionindicator {
+  cursor: crosshair;
+}
+
+.react-flow__node {
+  transition: box-shadow 0.2s ease !important;
+}
+
+.react-flow__node.selected {
+  box-shadow: 0 0 0 2px #8B5CF6, 0 0 20px rgba(139, 92, 246, 0.2) !important;
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+/* ─── Node Animations ────────────────────────────────────── */
+@keyframes nodeGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.3), 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.6), 0 0 40px rgba(139, 92, 246, 0.2);
+  }
+}
+
+@keyframes nodeGlowSuccess {
+  0% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.6), 0 0 40px rgba(34, 197, 94, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(34, 197, 94, 0), 0 0 0px rgba(34, 197, 94, 0);
+  }
+}
+
+@keyframes nodeGlowError {
+  0% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6), 0 0 40px rgba(239, 68, 68, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(239, 68, 68, 0), 0 0 0px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes edgeFlow {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.node-running {
+  animation: nodeGlowPulse 1.5s ease-in-out infinite !important;
+}
+
+.node-success {
+  animation: nodeGlowSuccess 1s ease-out forwards !important;
+}
+
+.node-error {
+  animation: nodeGlowError 1s ease-out forwards !important;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.2s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.2s ease-out;
+}
+
+/* ─── Selection Styles ───────────────────────────────────── */
+::selection {
+  background-color: rgba(139, 92, 246, 0.3);
+  color: #ffffff;
+}
+
+/* ─── Focus Styles ───────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
